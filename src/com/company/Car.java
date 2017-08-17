@@ -27,12 +27,9 @@ public class Car {
     public int getDistanceTraveled() { return distanceTraveled; }
 
 
-    public void setSpeedLimit(int limit){
-        speedLimit = limit;
-    }
+    public void setSpeedLimit(int limit){ speedLimit = limit; }
 
     public void moveForAnHour(){
-
         distanceTraveled += Math.min(normalSpeed, speedLimit);
     }
 }

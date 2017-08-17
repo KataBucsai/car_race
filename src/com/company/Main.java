@@ -10,38 +10,61 @@ public class Main {
 
     public static void main(String[] args) {
         createVehicles();
-        System.out.println(cars);
-        //simulateRace();
-        //printRaceResults();
+        simulateRace();
+        printRaceResults();
     }
 
     public static void createVehicles(){
         for (int i=0; i<10; i++){
             Car car = new Car();
-            //Motorcycle motor = new Motorcycle();
-            //Truck truck = new Truck();
+            Motorcycle motor = new Motorcycle();
+            Truck truck = new Truck();
             cars.add(car);
-            //motorcycles.add(motor);
-            //trucks.add(truck);
+            motorcycles.add(motor);
+            trucks.add(truck);
         }
     }
 
     public static void simulateRace(){
-        int isRaining;
+        int isLimitChance, isRaining, isBreakDownChance;
         for (int i=0; i<50; i++){
-           isRaining = ThreadLocalRandom.current().nextInt(0,  101);
+           isLimitChance = ThreadLocalRandom.current().nextInt(0,  101);
            for (Car car: cars){
-               if (isRaining < 30){
+               if (isLimitChance < 30){
                    car.setSpeedLimit(70);
                }
                car.moveForAnHour();
                car.setSpeedLimit(200);
            }
-        }
 
+            isRaining = ThreadLocalRandom.current().nextInt(0,  101);
+            for (Motorcycle motor: motorcycles){
+                if (isRaining < 30){
+                    int tempSpeed = ThreadLocalRandom.current().nextInt(50,  96);
+                    motor.setSpeedLimit(tempSpeed);
+                }
+                motor.moveForAnHour();
+                motor.setSpeedLimit(200);
+            }
+
+            for (Truck truck: trucks){
+                isBreakDownChance = ThreadLocalRandom.current().nextInt(0,  101);
+                int breakdownTurnsLeft;
+                breakdownTurnsLeft = truck.getBreakdownTurnsLeft();
+                if (breakdownTurnsLeft == 0){
+                    if (isBreakDownChance < 5){
+                        truck.setBreakdownTurnsLeft(1);
+                    } else {
+                        truck.moveForAnHour();
+                    }
+                } else {
+                    truck.setBreakdownTurnsLeft(0);
+                }
+            }
+        }
     }
 
     public static void printRaceResults(){
-
+                }
     }
 }
