@@ -65,6 +65,13 @@ public class Main {
     }
 
     public static void printRaceResults(){
-                }
+        for (Car car: cars){
+            System.out.format("%s %s Car%n", car.getName(), car.getDistanceTraveled());
+        }
+        for (Motorcycle motor: motorcycles){
+            System.out.format("%s %s Motorcycle%n", motor.getName(), motor.getDistanceTraveled());        }
+        for (Truck truck: trucks){
+            System.out.format("%s %s Truck%n", truck.getName(), truck.getDistanceTraveled());
+        }
     }
 }
